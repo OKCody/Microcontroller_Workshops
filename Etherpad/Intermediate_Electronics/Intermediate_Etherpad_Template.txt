@@ -1,0 +1,166 @@
+2016 OU Libraries EDGE Workshop Series: Intermediate Electronics Workshop
+February 22, 2016
+
+Intermediate Electronics Workshop
+In this session we'll focus on interfacing input and output devices with microcontrollers including light, flex, force, and temperature sensors.  We'll also work with electric motors, servos, and LEDs.
+
+
+Introductions
+
+Name, Affiliation, and Contact (if you'd like to be notified of future workshops)
+Cody Taylor, OU Libraries, codyalantaylor@ou.edu, @OKCody_
+
+
+
+
+
+Tools and Materials
+
+CodeBender.CC
+https://codebender.cc/
+Codebender is a browser-based interactive development environment (IDE) we will use it to compose, compile, and upload our code to our microcontrollers. 
+If you brought a computer with you (sorry, tablets won't work for this) please visit codebender.cc and create an account, preferrably using Chrome.  You'll be asked to install a browser plugin.  Please follow the provided instructions to do this.  If you're successful, please help your neighbor if they need it. :)
+
+Sparkfun Inventor's Kit
+https://www.sparkfun.com/products/12060
+The SparkFun Inventor’s Kit (SIK) is a great way to get started with programming and hardware interaction with the Arduino programming language. The SIK includes everything you need to complete 16 circuits that will teach you how to read sensors, display information on an LCD, drive motors, and more. You don’t need any previous programming or electronics experience to use this kit.
+
+We use these because they contain all parts necessary for a thorough introduction to microcontrollers and electronics.  The parts in these kits are not of the same quality that you'd likely use in professional or research-type applications.  These kits are relatively cheap and serve well as demonstration tools. 
+
+
+
+
+
+Workshop Topics
+
+
+
+
+analogRead()
+-----------------------------------------------------------------------------------------------------------------
+//This code reads raw analog voltage values applied to pin A0 and displays a number 
+//proportional to the applied voltage in the serial monitor.
+
+int probe = A0;
+
+void setup()
+{
+        Serial.begin( 9600 );
+        pinMode( probe, INPUT );
+}
+
+void loop()
+{
+        Serial.println( analogRead( probe ) );
+}
+
+-----------------------------------------------------------------------------------------------------------------
+
+Share your code below! 
+
+
+
+
+
+
+
+
+
+analogRead() - Scaled
+-----------------------------------------------------------------------------------------------------------------
+//For this, I recommend not copying and pasting, but rather edit the code above in analogRead() 
+//to match that below.  This will scale the raw voltage readings to an actual voltage.
+
+int probe = A0;
+
+void setup()
+{
+        Serial.begin( 9600 );
+        pinMode( probe, INPUT );
+}
+
+void loop()
+{
+        Serial.println( 5 * ( analogRead( probe )  / 1024.0 ) );
+}
+
+-----------------------------------------------------------------------------------------------------------------
+
+Share your code below!
+
+
+
+
+
+
+
+
+
+Servo.h  - Analog in - Analog out
+-----------------------------------------------------------------------------------------------------------------
+//This code manipulates a servo motor based on a sensor reading
+//This can be adapted for all of the sensors in the Sparkfun Inventor's Kits
+
+#include <Servo.h>
+
+Servo servo;
+
+int probe = A0;
+
+float min = 0;           //change to minimum expected voltage from sensor circuit
+float max = 0;          //change to maximum expected voltage from sensor circuit
+float reading = 0;
+
+void setup()
+{
+        Serial.begin( 9600 );
+        pinMode( probe, INPUT );
+        servo.attach( 9 );                //connect servo to pin 9
+}
+
+void loop()
+{
+        reading = 5 * ( analogRead( probe )  / 1024.0 );
+        Serial.println( reading );
+        servo.write( map( reading, min, max, 0, 180 ) );
+        delay( 15 );
+}
+-----------------------------------------------------------------------------------------------------------------
+
+Share your code below!
+
+
+
+
+
+
+
+
+
+Temperature Sensor 
+-----------------------------------------------------------------------------------------------------------------
+//This code displays temperature values in the serial monitor. 
+//Try adapting this to control a servo or an electric motor.
+
+int probe = A0;
+
+float reading = 0;
+float celsius = 0;
+float fahrenheit = 0;
+
+void setup()
+{
+        Serial.begin( 9600 );
+        pinMode( probe, INPUT );
+}
+
+void loop()
+{
+        reading = 5 * ( analogRead( probe )  / 1024.0 );
+        celsius = ( voltage - .5 ) * 100;
+        fahrenheit = celsius * ( 9 / 5.0 ) + 32;
+        Serial.println( fahrenheit );
+}
+-----------------------------------------------------------------------------------------------------------------
+
+Share your code below!

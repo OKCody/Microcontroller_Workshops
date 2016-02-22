@@ -1,0 +1,128 @@
+2016 OU Libraries EDGE Workshop Series: Introductory Electronics
+February 17, 2016
+
+In this session we'll learn what microcontrollers are, what they are useful for, and how to begin working with them in the most primitive way.
+
+Name, Affiliation, and Contact (if you'd like to be notified of future workshops)
+Cody Taylor, OU Libraries, codyalantaylor@ou.edu, @OKCody_
+
+
+
+
+
+
+
+
+CodeBender.CC
+https://codebender.cc/
+Codebender is a browser-based interactive development environment (IDE) we will use it to compose, compile, and upload our code to our microcontrollers. 
+If you brought a computer with you (sorry, tablets won't work for this) please visit codebender.cc and create an account, preferrable using Chrome.  You'll be asked to install a browser plugin.  Please follow the provided instructions to do this.  If you're successful, please help your neighbor if they need it. :)
+
+
+
+
+Sparkfun Inventor's Kit
+https://www.sparkfun.com/products/12060
+The SparkFun Inventor’s Kit (SIK) is a great way to get started with programming and hardware interaction with the Arduino programming language. The SIK includes everything you need to complete 16 circuits that will teach you how to read sensors, display information on an LCD, drive motors, and more. You don’t need any previous programming or electronics experience to use this kit.
+
+We use these because they contain all parts necessary for a thorough introduction to microcontrollers and electronics.  The parts in these kits are not of the same quality that you'd likely use in professional or research-type applications.  These kits are relatively cheap and serve well as demonstration tools. 
+
+
+
+
+
+HelloWorld
+-----------------------------------------------------------------------------------------------------------------
+//The HelloWorld is a ceremonial first exercise when beginning to explore a new programming language.  Give it a shot!
+//This code is written in C/C++
+//Comments in C/C++ take this form
+//Comment and uncomment the lines Serial.println("HelloWorld!"); note what happens
+
+void setup()
+{
+        Serial.begin(9600);
+        Serial.println("HelloWorld!");
+}
+
+void loop()
+{
+        //Serial.println("HelloWorld!");
+}
+-----------------------------------------------------------------------------------------------------------------
+
+Share your code below! Paste a link to your code if you are particularly proud of what you made. 
+https://codebender.cc/sketch:235117
+
+
+
+
+
+
+
+
+Blink
+-----------------------------------------------------------------------------------------------------------------
+//in the world of physical computing the blink sketch another ceremonial first program.
+//toy with the numbers in this program and see what happens
+//at what frequency can you no longer perceive the led to be blinking?
+//using this code, wire up an LED on your breadboard using a 330ohm resistor and a handfull of wires.
+//once you get that working, try adding more LEDs.
+
+int led = 13;  //create an integer variable called "led". let it take on the value 13 (as in pin 13)
+
+void setup()
+{
+        pinMode(led, OUTPUT);  //configure the led pin as an output
+}
+
+void loop()
+{
+        digitalWrite(led, HIGH);  //apply logic high (5v) to led pin
+        delay(1000);              //do nothing for 1000ms
+        digitalWrite(led, LOW);   //apply logic low (0v) to led pin
+        delay(1000);              //do nothing for another 1000ms
+}
+-----------------------------------------------------------------------------------------------------------------
+
+Share your code below!
+https://codebender.cc/sketch:235119
+
+
+
+
+
+
+
+
+
+
+digitalRead()
+-----------------------------------------------------------------------------------------------------------------
+//this code turns on an LED when a button is pressed and turns it off when not pressed
+//try to adding another button and maybe another LED
+//you choose what sort of logic to implement
+
+int button = 8;  //create an integer variable. let it take on the value 8 (as in pin 8)
+int led = 13;    //create an integer variable. let it take on the value 13 (as in pin 13)
+
+void setup()
+{
+        pinMode(button, INPUT);  //buttons are input devices
+        pinMode(led, OUTPUT);    //LEDs are output devices
+}
+
+void loop()
+{
+        //digitalRead() returns a binary value, HIGH or LOW corresponding to 5v or 0v respectively
+        //when each is applied to the specified pin
+        if( digitalRead(button) ){
+                digitalWrite(led, HIGH);
+        }
+        else{
+                digitalWrite(led, LOW);
+        }
+}
+-----------------------------------------------------------------------------------------------------------------
+
+Share your code below!
+https://codebender.cc/sketch:235123
